@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+
+	socketio "github.com/googollee/go-socket.io"
 )
 
 func main() {
@@ -30,7 +32,7 @@ func main() {
 		s.Close()
 		return last
 	})
-	server.OnError("/", func(s socketio.Conn, e error) {
+	server.OnError("/", func(e error) {
 		fmt.Println("meet error:", e)
 	})
 	server.OnDisconnect("/", func(s socketio.Conn, reason string) {
